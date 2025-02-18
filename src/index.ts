@@ -12,11 +12,11 @@ cloudinary.config({
 
 // PART ONE - Adding existing subtitles
 
-const video = cloudinary.url("cloudinary-node-subtitle-demo/test", {
+const video = cloudinary.url("cloudinary-node-subtitle-demo/first", {
     resource_type: "video",
     overlay: {
         resource_type: "subtitles",
-        public_id: "cloudinary-node-subtitle-demo/test.transcript",
+        public_id: "cloudinary-node-subtitle-demo/first.transcript",
     },
 })
 
@@ -24,24 +24,21 @@ console.log(video)
 
 // PART TWO - Adding generated subtitles
 
-const path = `${os.homedir()}/Desktop/cloudinary-node-subtitle-demo/generated.mp4`
+const path = `${os.homedir()}/Desktop/cloudinary-node-subtitle-demo/second.mp4`
 
 await cloudinary.uploader.upload(path, {
-    public_id: "generated",
+    public_id: "second",
     folder: "cloudinary-node-subtitle-demo",
     resource_type: "video",
     raw_convert: "google_speech:srt:vtt",
 })
 
-const uploadedVideo = cloudinary.url(
-    "cloudinary-node-subtitle-demo/generated",
-    {
-        resource_type: "video",
-        overlay: {
-            resource_type: "subtitles",
-            public_id: "cloudinary-node-subtitle-demo/generated.transcript",
-        },
+const uploadedVideo = cloudinary.url("cloudinary-node-subtitle-demo/second", {
+    resource_type: "video",
+    overlay: {
+        resource_type: "subtitles",
+        public_id: "cloudinary-node-subtitle-demo/second.transcript",
     },
-)
+})
 
 console.log(uploadedVideo)
